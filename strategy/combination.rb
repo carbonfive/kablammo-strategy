@@ -1,8 +1,7 @@
 module Strategy
   class Combination < Base
-    def initialize(&block)
-      @chooser = block
-    end
+
+    attr_accessor :chooser
 
     def next_turn
       strategy = @chooser.call

@@ -1,10 +1,12 @@
 module Strategy
   class Strategy < Combination
-    def initialize
-      super do
-        Combination.new do
-          rand() <= 0.5 ? Aggressive.new : Defensive.new
-        end
+    def initialize(username)
+      super
+
+      self.chooser = Proc.new do
+        factors = { mwynholds: 0.8, carbonfive: 0.5, dhendee: 0.2 }
+        factor = factors[username.to_sym] || 0.5
+        rand() <= factor ? Aggressive.new(username) : Defensive.new(username)
       end
     end
   end

@@ -13,20 +13,21 @@ Dir['./strategy/**/*.rb'].each { |f| require f }
 
 Thread.abort_on_exception = true
 
-channel = ARGV[0]
+username = ARGV[0]
 capsule = RedisMessageCapsule.capsule
 
-send_channel = capsule.channel "#{channel}-send"
-receive_channel = capsule.channel "#{channel}-receive"
+send_channel = capsule.channel "#{username}-send"
+receive_channel = capsule.channel "#{username}-receive"
 
-def next_turn(channel, args)
+def next_turn(username, args)
   battle = Strategy::Model::Battle.new args
-  Strategy::Strategy.new.execute_turn channel, battle
+  strategy = Strategy::Strategy.new username
+  strategy.execute_turn battle
 end
 
-puts "Welcome to Kablammo, #{channel}!"
+puts "Welcome to Kablammo, #{username}!"
 receive_channel.register do |msg|
-  turn = next_turn channel, msg
+  turn = next_turn username, msg
   send_channel.send turn
 end
 

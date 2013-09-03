@@ -5,8 +5,11 @@ module Strategy
   class Base
     attr_reader :username, :battle
 
-    def execute_turn(username, battle)
+    def initialize(username)
       @username = username
+    end
+
+    def execute_turn(battle)
       @battle = battle
       next_turn
     end
