@@ -19,15 +19,16 @@ capsule = RedisMessageCapsule.capsule
 send_channel = capsule.channel "#{username}-send"
 receive_channel = capsule.channel "#{username}-receive"
 
-def next_turn(username, args)
+strategy = Strategy::Strategy.new username
+
+def next_turn(strategy, args)
   battle = Strategy::Model::Battle.new args
-  strategy = Strategy::Strategy.new username
   strategy.execute_turn battle
 end
 
 puts "Welcome to Kablammo, #{username}!"
 receive_channel.register do |msg|
-  turn = next_turn username, msg
+  turn = next_turn strategy, msg
   send_channel.send turn
 end
 

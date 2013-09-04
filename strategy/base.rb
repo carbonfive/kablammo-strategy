@@ -33,7 +33,7 @@ module Strategy
     end
 
     def find_enemies
-      battle.robots.reject {|t| t == robot}.reject {|t| t.dead?}
+      battle.robots.reject {|r| r == robot}.reject {|r| r.dead?}
     end
 
     def pointed_at?(enemy)
@@ -81,8 +81,27 @@ module Strategy
 
     def dodge(enemy)
       am = aggressive_moves enemy
-      moves = [ am[1], am[2], am[3], am[4] ]
-      moves.find { |m| can_move? m }
+      d1 = enemy.square.distance_to square_for(am[1])
+      d2 = enemy.square.distance_to square_for(am[2])
+      if d1 > d2
+        moves = [ am[1], am[2], am[3], am[0] ]
+      else
+        moves = [ am[2], am[1], am[3], am[0] ]
+      end
+      best_move moves
+    end
+
+    def dance
+      best_move %w(n s e w).shuffle
+    end
+
+    def hunt
+      x, y = robot.square.x, robot.square.y
+      return best_move 'nesw' if x == 0
+      return best_move 'eswn' if y == @battle.board.height - 1
+      return best_move 'swne' if x == @battle.board.width - 1
+      return best_move 'wnes' if y == 0
+      best_move 'wsen'
     end
 
     def aggressive_moves(enemy)
@@ -110,6 +129,11 @@ module Strategy
     def can_move?(move)
       next_square = square_for move
       next_square && next_square.empty?
+    end
+
+    def best_move(input)
+      moves = ( input.is_a?(Array) ? input : input.split('') )
+      moves.find { |m| can_move? m }
     end
 
     def rest

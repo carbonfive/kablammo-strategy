@@ -21,11 +21,11 @@ module Strategy::Model
     end
 
     def direction_to(enemy)
-      square.board.direction_to(square, enemy.square)
+      square.direction_to enemy.square
     end
 
     def distance_to(enemy)
-      square.board.distance_to(square, enemy.square)
+      square.distance_to enemy.square
     end
 
     def line_of_sight(skew = 0)

@@ -23,5 +23,15 @@ module Strategy::Model
     def robot?
       @state == 'robot'
     end
+
+    def distance_to(square)
+      return 0 unless square
+      @board.distance_to(self, square)
+    end
+
+    def direction_to(square)
+      return 0 unless square
+      @board.direction_to(self, square)
+    end
   end
 end
