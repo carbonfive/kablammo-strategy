@@ -37,5 +37,9 @@ module Strategy::Model
       return 0 unless square
       @board.direction_to(self, square)
     end
+
+    def to_s
+      "Square[#{x}, #{y}, #{state}]"
+    end
   end
 end

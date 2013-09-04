@@ -37,5 +37,9 @@ module Strategy::Model
       pixels = square.board.line_of_sight(square, direction_to(enemy))
       pixels.map { |p| square.board.square_at(p.x, p.y) }
     end
+
+    def to_s
+      "Robot[#{username}, rot=#{rotation}, ammo=#{ammo}, armor=#{armor}, turns=#{turns}]"
+    end
   end
 end

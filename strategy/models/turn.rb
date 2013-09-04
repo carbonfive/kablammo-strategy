@@ -5,7 +5,12 @@ module Strategy::Model
     attr_accessor :value, :robot
 
     def initialize(parent, args)
+      super
       @robot = parent
+    end
+
+    def to_s
+      @value
     end
   end
 end
