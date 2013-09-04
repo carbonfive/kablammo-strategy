@@ -26,6 +26,10 @@ def next_turn(strategy, args)
   strategy.execute_turn battle
 end
 
+redis = Redis.new
+redis.del send_channel
+redis.del receive_channel
+
 puts "Welcome to Kablammo, #{username}!"
 receive_channel.register do |msg|
   turn = next_turn strategy, msg
