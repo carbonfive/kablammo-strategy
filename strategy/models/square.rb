@@ -24,6 +24,10 @@ module Strategy::Model
       @state == 'robot'
     end
 
+    def obscured?
+      @state == 'obscured'
+    end
+
     def distance_to(square)
       return 0 unless square
       @board.distance_to(self, square)
