@@ -7,6 +7,7 @@ module Strategy::Model
     def initialize(parent, args)
       super
 
+      @state ||= 'empty'
       @robot = Robot.new self, @robot if @robot
       @board = parent
     end
