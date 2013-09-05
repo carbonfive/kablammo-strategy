@@ -3,23 +3,28 @@ require 'bundler'
 Bundler.require 'default'
 
 if ARGV.empty?
-  puts "Usage: ruby index.rb <channel>"
+  puts "Usage: ruby index.rb <channel> <strategy>"
   exit 1
 end
 
-require './strategy/models/base.rb'
-require './strategy/base.rb'
-Dir['./strategy/**/*.rb'].each { |f| require f }
+require './lib/strategy'
 
 Thread.abort_on_exception = true
 
 username = ARGV[0]
+strategy_path = if ARGV.length > 1
+                  ARGV[1]
+                else
+                  'strategy.rb'
+                end
+strategy_path = File.join(Dir.pwd, strategy_path)
 capsule = RedisMessageCapsule.capsule
 
 send_channel = capsule.channel "#{username}-send"
 receive_channel = capsule.channel "#{username}-receive"
 
-strategy = Strategy::Strategy.new username
+strategy = Strategy::Base.new username
+strategy.load strategy_path
 
 def next_turn(strategy, args)
   battle = Strategy::Model::Battle.new args
