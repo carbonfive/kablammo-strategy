@@ -7,9 +7,7 @@ if ARGV.empty?
   exit 1
 end
 
-require './strategy/models/base.rb'
-require './strategy/base.rb'
-Dir['./strategy/**/*.rb'].each { |f| require f }
+require './lib/strategy'
 
 Thread.abort_on_exception = true
 
@@ -25,7 +23,7 @@ capsule = RedisMessageCapsule.capsule
 send_channel = capsule.channel "#{username}-send"
 receive_channel = capsule.channel "#{username}-receive"
 
-strategy = Strategy::DSL.new username
+strategy = Strategy::Base.new username
 strategy.load strategy_path
 
 def next_turn(strategy, args)
