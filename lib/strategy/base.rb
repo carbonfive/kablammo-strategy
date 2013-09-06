@@ -34,6 +34,10 @@ module Strategy
       visible_players.reject{ |r| r == me }
     end
 
+    def power_ups
+      battle.power_ups
+    end
+
     def for_use_by(strategy)
       @username = strategy.username
       @battle = strategy.battle

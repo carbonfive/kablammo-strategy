@@ -20,6 +20,9 @@ module Aggressive
   end
 
   def act_aggressively
+    power_up = power_ups.first
+    return move_towards! power_up if power_up
+
     enemy = opponents.first
     return hunt unless enemy
     return rest if my.ammo == 0

@@ -2,13 +2,14 @@ module Strategy::Model
   class Square
     include Base
 
-    attr_accessor :x, :y, :state, :robot, :board
+    attr_accessor :x, :y, :state, :robot, :power_up, :board
 
     def initialize(parent, args)
       super
 
       @state ||= 'empty'
       @robot = Robot.new self, @robot if @robot
+      @power_up = PowerUp.new self, @power_up if @power_up
       @board = parent
     end
 
@@ -22,6 +23,10 @@ module Strategy::Model
 
     def robot?
       @state == 'robot'
+    end
+
+    def power_up?
+      @state == 'power_up'
     end
 
     def obscured?

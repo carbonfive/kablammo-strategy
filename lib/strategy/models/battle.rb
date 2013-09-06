@@ -12,5 +12,9 @@ module Strategy::Model
     def robots
       @board.squares.select {|s| s.robot?}.map {|s| s.robot}
     end
+
+    def power_ups
+      @board.squares.select {|s| s.power_up?}.map {|s| s.power_up}
+    end
   end
 end

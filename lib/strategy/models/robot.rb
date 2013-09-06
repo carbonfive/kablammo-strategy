@@ -5,11 +5,12 @@ module Strategy::Model
 
     MAX_AMMO = 5
 
-    attr_accessor :username, :rotation, :ammo, :armor, :turns, :square
+    attr_accessor :username, :rotation, :ammo, :armor, :turns, :power_ups, :square
 
     def initialize(parent, args)
       super
       @turns = @turns.map { |t| Turn.new self, t }
+      @power_ups = @power_ups.map { |p| PowerUp.new self, p }
       @square = parent
     end
 
@@ -62,7 +63,7 @@ module Strategy::Model
 
     def can_move?(move)
       move_square = square_for move
-      move_square and move_square.empty?
+      move_square and ( move_square.empty? || move_square.power_up? )
     end
 
     def to_s
