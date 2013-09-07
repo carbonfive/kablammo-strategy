@@ -4,13 +4,13 @@ module Defensive
   end
 
   def dodge(enemy)
-    am = moves_toward enemy
-    d1 = enemy.square.distance_to robot.square_for(am[1])
-    d2 = enemy.square.distance_to robot.square_for(am[2])
+    toward = moves_toward enemy
+    d1 = enemy.distance_to robot.target_for(toward[1])
+    d2 = enemy.distance_to robot.target_for(toward[2])
     if d1 > d2
-      moves = [ am[1], am[2], am[3], am[0] ]
+      moves = [ toward[1], toward[2], toward[3], toward[0] ]
     else
-      moves = [ am[2], am[1], am[3], am[0] ]
+      moves = [ toward[2], toward[1], toward[3], toward[0] ]
     end
     first_possible_move moves
   end

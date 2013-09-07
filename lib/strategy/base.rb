@@ -48,10 +48,6 @@ module Strategy
       battle.robots.find { |r| r.username == @username }
     end
 
-    def square
-      robot.square
-    end
-
     def board
       battle.board
     end
@@ -96,9 +92,7 @@ module Strategy
     end
 
     def aiming_at?(target)
-      robot.line_of_sight.any? do |square|
-        square.x == target.x and square.y == target.y
-      end
+      robot.line_of_sight.any? { |p| p.located_at? target }
     end
 
     def aim_at!(target)
@@ -125,10 +119,8 @@ module Strategy
       move! first_possible_move moves_toward(target).reverse
     end
 
-    def obscured?(enemy)
-      los = robot.line_of_sight_to enemy
-      hit = los.find { |s| ! s.empty? }
-      los.include?(enemy.square) && hit != enemy.square
+    def obscured?(target)
+      ! i.can_see? target
     end
 
     def moves_toward(target)

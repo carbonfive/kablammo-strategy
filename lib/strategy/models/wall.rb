@@ -1,17 +1,17 @@
 module Strategy::Model
-  class PowerUp
+  class Wall
     include Base
     include Target
 
-    attr_accessor :name, :duration, :type, :abilities
+    attr_accessor :board
 
     def initialize(parent, args)
       super
-      @parent = parent
+      @board = parent
     end
 
     def to_s
-      "PowerUp[#{x}, #{y}, #{name}, #{duration}]"
+      "Wall[#{x}, #{y}]"
     end
   end
 end

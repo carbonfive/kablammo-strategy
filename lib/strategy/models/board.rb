@@ -2,19 +2,30 @@ module Strategy::Model
   class Board
     include Base
 
-    attr_accessor :width, :height, :squares, :battle
+    attr_accessor :width, :height, :robots, :walls, :power_ups, :battle
 
     def initialize(parent, args)
       super
 
-      @squares = @squares.map { |s| Square.new self, s }
+      @robots = @robots.map { |r| Robot.new self, r }
+      @walls = @walls.map { |w| Wall.new self, w }
+      @power_ups = @power_ups.map { |p| PowerUp.new self, p }
       @battle = parent
     end
 
-    def square_at(x, y)
-      return nil if x < 0 || x >= @width
-      return nil if y < 0 || y >= @height
-      @squares[@width * y + x]
+    def in_bounds?(target)
+      return false if target.x < 0 || target.x >= @width
+      return false if target.y < 0 || target.y >= @height
+      true
+    end
+
+    def available?(target)
+      return false unless in_bounds? target
+      @walls.none? { |w| w.located_at? target } && @robots.none? { |r| r.located_at? target }
+    end
+
+    def obstruction?(target)
+      @walls.any? { |w| w.located_at? target } || @robots.any? { |r| r.located_at? target }
     end
 
     def direction_to(source, dest)
@@ -26,8 +37,7 @@ module Strategy::Model
     end
 
     def line_of_sight(source, degrees)
-      los = geometry.line_of_sight source, degrees
-      los.map { |p| square_at(p.x, p.y) }
+      geometry.line_of_sight(source, degrees).map {|p| Pixel.new p}
     end
 
     private
