@@ -33,8 +33,7 @@ end
 
 def shutdown(process, msg=nil)
   puts "\n\n#{msg}" if msg
-  process[:shutdown] = true
-  Thread.exit
+  exit 0
 end
 
 capsule = RedisMessageCapsule.capsule
@@ -66,9 +65,7 @@ end
 puts "Welcome to Kablammo, #{username}!"
 
 begin
-  while !process[:shutdown] do
-    sleep 1
-  end
+  sleep
 rescue SignalException => e
   puts
   puts 'You Quit'
