@@ -11,7 +11,7 @@ module Strategy::Model
     end
 
     def to_s
-      @value
+      "Turn[#{value} rotation: #{rotation}, ammo: #{ammo}, armor: #{armor}, abilities: #{abilities}]"
     end
   end
 end

@@ -14,18 +14,18 @@ module Strategy::Model
     end
 
     def in_bounds?(target)
-      return false if target.x < 0 || target.x >= @width
-      return false if target.y < 0 || target.y >= @height
+      return false if target.x < 0 || target.x >= width
+      return false if target.y < 0 || target.y >= height
       true
     end
 
     def available?(target)
       return false unless in_bounds? target
-      @walls.none? { |w| w.located_at? target } && @robots.none? { |r| r.located_at? target }
+      walls.none? { |w| w.located_at? target } && robots.none? { |r| r.located_at? target }
     end
 
     def obstruction?(target)
-      @walls.any? { |w| w.located_at? target } || @robots.any? { |r| r.located_at? target }
+      walls.any? { |w| w.located_at? target } || robots.any? { |r| r.located_at? target }
     end
 
     def direction_to(source, dest)

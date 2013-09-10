@@ -10,11 +10,11 @@ module Strategy::Model
     end
 
     def robots
-      @board.robots
+      board.robots
     end
 
     def power_ups
-      @board.power_ups
+      board.power_ups
     end
   end
 end
