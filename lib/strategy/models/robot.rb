@@ -6,7 +6,7 @@ module Strategy::Model
 
     MAX_AMMO = 5
 
-    attr_accessor :username, :rotation, :ammo, :armor, :turns, :power_ups, :board
+    attr_accessor :username, :turns, :power_ups, :board
 
     def initialize(parent, args)
       super
@@ -15,28 +15,48 @@ module Strategy::Model
       @board = parent
     end
 
+    def x
+      turns.last.x
+    end
+
+    def y
+      turns.last.y
+    end
+
+    def armor
+      turns.last.armor
+    end
+
+    def ammo
+      turns.last.ammo
+    end
+
+    def rotation
+      turns.last.rotation
+    end
+
     def ammo_full?
-      @ammo == MAX_AMMO
+      ammo == MAX_AMMO
     end
 
     def dead?
-      @armor < 0
+      armor < 0
     end
 
     def direction_to(target)
-      @board.direction_to self, target
+      board.direction_to self, target
     end
 
     def distance_to(target)
-      @board.distance_to self, target
+      board.distance_to self, target
     end
 
     def line_of_sight(skew = 0)
-      @board.line_of_sight(self, @rotation + skew).map {|p| Pixel.new p}
+      board.line_of_sight(self, rotation + skew).map {|p| Pixel.new p}
     end
 
     def line_of_sight_to(target)
-      @board.line_of_sight(self, direction_to(target)).map {|p| Pixel.new p}
+      board.line_of_sight(self, direction_to(target)).map {|p| Pixel.new p}
     end
 
     def can_fire_at?(target)
@@ -45,7 +65,7 @@ module Strategy::Model
 
     def can_see?(target)
       los = line_of_sight_to target
-      hit = los.detect { |p| @board.obstruction? p }
+      hit = los.detect { |p| board.obstruction? p }
       val = target.located_at? hit
       val
     end
@@ -60,11 +80,11 @@ module Strategy::Model
     end
 
     def can_move?(move)
-      @board.available? target_for(move)
+      board.available? target_for(move)
     end
 
     def to_s
-      "Robot[#{x}, #{y}, #{username}, rot=#{rotation}, ammo=#{ammo}, armor=#{armor}, turns=#{turns}]"
+      "Robot[#{username}, turns=#{turns}]"
     end
   end
 end
