@@ -4,8 +4,6 @@ module Strategy::Model
     include Target
     include Strategy::Constants
 
-    MAX_AMMO = 5
-
     attr_accessor :username, :turns, :power_ups, :board
 
     def initialize(parent, args)
