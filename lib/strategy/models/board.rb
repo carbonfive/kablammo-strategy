@@ -2,7 +2,7 @@ module Strategy::Model
   class Board
     include Base
 
-    attr_accessor :width, :height, :robots, :walls, :power_ups, :battle
+    attr_accessor :width, :height, :robots, :walls, :power_ups, :turn
 
     def initialize(parent, args)
       super
@@ -10,7 +10,7 @@ module Strategy::Model
       @robots = @robots.map { |r| Robot.new self, r }
       @walls = @walls.map { |w| Wall.new self, w }
       @power_ups = @power_ups.map { |p| PowerUp.new self, p }
-      @battle = parent
+      @turn = parent
     end
 
     def in_bounds?(target)

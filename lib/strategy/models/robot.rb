@@ -4,33 +4,12 @@ module Strategy::Model
     include Target
     include Strategy::Constants
 
-    attr_accessor :username, :turns, :power_ups, :board
+    attr_accessor :last_turn, :username, :x, :y, :armor, :ammo, :rotation, :direction, :abilities, :power_ups, :board
 
     def initialize(parent, args)
       super
-      @turns = @turns.map { |t| Turn.new self, t }
       @power_ups = @power_ups.map { |p| PowerUp.new self, p }
       @board = parent
-    end
-
-    def x
-      turns.last.x
-    end
-
-    def y
-      turns.last.y
-    end
-
-    def armor
-      turns.last.armor
-    end
-
-    def ammo
-      turns.last.ammo
-    end
-
-    def rotation
-      turns.last.rotation
     end
 
     def ammo_full?
@@ -82,7 +61,7 @@ module Strategy::Model
     end
 
     def to_s
-      "Robot[#{username}, turns=#{turns}]"
+      "Robot[#{username}, x=#{x}, y=#{y}, ammo=#{ammo}, armor=#{armor}, rotation=#{rotation}, direction=#{direction}]"
     end
   end
 end
