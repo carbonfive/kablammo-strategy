@@ -41,6 +41,7 @@ send_channel = capsule.channel "#{username}-send"
 receive_channel = capsule.channel "#{username}-receive"
 
 send_channel.clear
+receive_channel.clear
 Thread.abort_on_exception = true
 
 process = Thread.current
