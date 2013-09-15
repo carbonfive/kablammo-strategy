@@ -2,11 +2,15 @@ module Strategy::Model
   class Battle
     include Base
 
-    attr_accessor :name, :board
+    attr_accessor :name, :turn
 
     def initialize(args)
       super nil, args
-      @board = Board.new self, @board
+      @turn = Turn.new self, @turn
+    end
+
+    def board
+      turn.board
     end
 
     def robots

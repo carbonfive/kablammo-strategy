@@ -1,17 +1,17 @@
 module Strategy::Model
   class Turn
     include Base
-    include Target
 
-    attr_accessor :value, :rotation, :ammo, :armor, :abilities, :robot
+    attr_accessor :board, :battle
 
     def initialize(parent, args)
       super
-      @robot = parent
+      @battle = parent
+      @board = Board.new self, @board
     end
 
     def to_s
-      "Turn[#{value} rotation: #{rotation}, ammo: #{ammo}, armor: #{armor}, abilities: #{abilities}]"
+      "Turn[]"
     end
   end
 end
