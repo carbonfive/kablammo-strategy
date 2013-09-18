@@ -13,6 +13,10 @@ module Strategy
       instance_eval(code, strategy_path)
     end
 
+    def include(mod)
+      self.class.send :include, mod
+    end
+
     def on_turn(&block)
       @on_turn_block = block
     end
