@@ -16,8 +16,12 @@ module Strategy::Model
       ammo == MAX_AMMO
     end
 
+    def alive?
+      armor > 0
+    end
+
     def dead?
-      armor < 0
+      ! alive?
     end
 
     def direction_to(target)
