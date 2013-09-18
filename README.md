@@ -1,20 +1,8 @@
-# How to Play
+# Kablammo Strategy Guide
 
-### 1. Fork the Kablammo Strategy Repo
-[https://github.com/carbonfive/kablammo-strategy/fork](https://github.com/carbonfive/kablammo-strategy/fork)
+If you haven't already, visit [http://kablammo.io](http://kablammo.io) and take a look around at the existing bots and the arena, as well as the rules and basic instructions.
 
-### 2. Write Your Strategy 
-(See below.)
-
-### 3. Upload Your Robot
-[http://kablammo.io/strategies/new](http://kablammo.io/strategies/new)
-
-### 4. Fight!
-[http://kablammo.io/battles/new](http://kablammo.io/battles/new)
-
-- - -
-
-## Writing Your Strategy
+## Basics
 
 Your robot's strategy should be contained in the `strategy/strategy.rb` file located in your fork of the Kablammo Strategy repo.
 
@@ -33,7 +21,7 @@ def next_turn
 end
 `
 
-### Details
+## Details
 
 Each robot begins with 5 ammo and 10 armor. If your robot's armor reaches 0, you are eliminated from the arena and lose 1 point. If your robot is the last remaining robot in the arena, you are victorious and gain 3 points.
 
@@ -48,7 +36,7 @@ All robot turns are resolved in phases, simultaneously:
 
 Because all movement is resolved before firing, your firing solution can be adjusted by up to 10 degrees in either direction from your turret's current facing. In this manner, your robot can 'guess' which direction the enemy robot is going to move and fire at the predicted location.
 
-### Tips
+## Tips
 
 To help you get started, there are sample strategies provided for agressive, defensive, and hybrid robots. 
 
