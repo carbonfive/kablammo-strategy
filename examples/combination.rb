@@ -1,12 +1,9 @@
-module Strategy
-  class Combination < Base
+require './aggressive'
+require './defensive'
 
-    attr_accessor :chooser
+include Aggressive
+include Defensive
 
-    def next_turn
-      strategy = @chooser.call
-      strategy.for_use_by self
-      strategy.next_turn
-    end
-  end
+on_turn do
+  rand > 0.5 ? act_aggressively : act_defensively
 end

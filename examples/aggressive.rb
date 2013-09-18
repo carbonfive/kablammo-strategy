@@ -20,22 +20,12 @@ module Aggressive
   end
 
   def act_aggressively
-    #power_up = power_ups.first
-    #puts "move_towards! (power_up)" if power_up
-    #return move_towards! power_up if power_up
-
     enemy = opponents.first
-    puts "hunt" unless enemy
     return hunt unless enemy
-    puts "rest" if my.ammo == 0
     return rest if my.ammo == 0
-    puts "move_towards! (obscured)" if obscured? enemy
     return move_towards! enemy if obscured? enemy
-    puts "fire_at!" if can_fire_at? enemy
     return fire_at! enemy, 0.75 if can_fire_at? enemy
-    puts "aim_at!" unless aiming_at? enemy
     return aim_at! enemy unless aiming_at? enemy
-    puts "move_towards! (default)"
     move_towards! enemy
   end
 end
