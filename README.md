@@ -12,6 +12,7 @@ It's gotta be on github.
 
 ### 3. Write your strategy.rb
 (see below)
+(and this: https://github.com/carbonfive/kablammo-template)
 
 ## Writing a Strategy
 All your strategy has to do is call the on_turn handler method and return a string containing one of four commands - identifying what your robot should do next.
