@@ -40,7 +40,7 @@ It's that easy!  Unless, of course, you want to win some battles.
 
 ## Details
 
-Each robot begins with 5 ammo and 10 armor. If your robot's armor reaches 0, you are eliminated from the arena and lose 1 point. If your robot is the last remaining robot in the arena, you are victorious and gain 3 points.
+Each robot begins with 10 ammo and 5 armor. If your robot's armor reaches 0, you are eliminated from the arena and lose 1 point. If your robot is the last remaining robot in the arena, you are victorious and gain 3 points.
 
 All battles last (at most) 100 turns. If more than one robot remains after 100 turns (or if the remaining robots are eliminated simultaneously), each remaining robot earns 1 point for a tie.
 
