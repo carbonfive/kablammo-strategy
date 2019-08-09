@@ -104,7 +104,7 @@ module Strategy
     end
 
     def rest(skew = 0)
-      '.' + skew
+      ".#{skew}"
     end
 
     def can_move?(move)
