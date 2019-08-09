@@ -56,11 +56,11 @@ module Strategy
       battle.board
     end
 
-    def fire(skew=0)
+    def fire(skew = 0)
       "f#{skew}"
     end
 
-    def fire!(skew=0)
+    def fire!(skew = 0)
       fire skew
     end
 
@@ -75,24 +75,24 @@ module Strategy
       rotate degrees
     end
 
-    def move!(direction)
-      direction
+    def move!(direction, skew = 0)
+      direction + skew
     end
 
-    def move_north!
-      move! NORTH
+    def move_north!(skew = 0)
+      move! NORTH, skew
     end
 
-    def move_south!
-      move! SOUTH
+    def move_south!(skew = 0)
+      move! SOUTH, skew
     end
 
-    def move_east!
-      move! EAST
+    def move_east!(skew = 0)
+      move! EAST, skew
     end
 
-    def move_west!
-      move! WEST
+    def move_west!(skew = 0)
+      move! WEST, skew
     end
 
     def aiming_at?(target)
@@ -103,8 +103,8 @@ module Strategy
       rotate! robot.direction_to(target).round
     end
 
-    def rest
-      '.'
+    def rest(skew = 0)
+      '.' + skew
     end
 
     def can_move?(move)
@@ -115,12 +115,12 @@ module Strategy
       i.can_fire_at? target
     end
 
-    def move_towards!(target)
-      move! first_possible_move moves_toward(target)
+    def move_towards!(target, skew = 0)
+      move! first_possible_move(moves_toward(target)), skew
     end
 
-    def move_away_from!(target)
-      move! first_possible_move moves_toward(target).reverse
+    def move_away_from!(target, skew = 0)
+      move! first_possible_move(moves_toward(target).reverse), skew
     end
 
     def obscured?(target)
