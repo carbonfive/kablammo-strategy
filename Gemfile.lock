@@ -12,11 +12,11 @@ GEM
   specs:
     execjs (1.4.0)
       multi_json (~> 1.0)
-    json (1.8.0)
-    multi_json (1.7.9)
-    oj (2.1.4)
+    json (2.2.0)
+    multi_json (1.13.1)
+    oj (3.8.1)
     rake (10.1.0)
-    redis (3.0.4)
+    redis (4.1.2)
     redis_message_capsule (0.8.3)
       json
       redis
@@ -27,3 +27,6 @@ PLATFORMS
 DEPENDENCIES
   kablammo!
   rake
+
+BUNDLED WITH
+   2.0.2
