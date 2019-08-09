@@ -94,7 +94,42 @@ Obviously your robot has some motion-hindered solar laser batteries. Duh.
 
 To help you get started, there are example strategies provided for aggressive, defensive, and hybrid robots in the gem's code base.
 
-In addition, `base.rb` contains a DSL that implements some of the more complicated logic for locating enemies, avoiding walls, and calculating firing solutions. The sample strategies utilize this DSL, but you are free to roll your own, so long as it emits one of the approved returns for the `on_turn` handler.
+In addition, [`base.rb`](./lib/strategy/base.rb) contains a DSL that implements some of the more complicated logic for locating enemies, avoiding walls, and calculating firing solutions. The sample strategies utilize this DSL, but you are free to roll your own, so long as it emits one of the approved returns for the `on_turn` handler.
+
+## Testing
+
+You may want to test your strategy. It can be useful to set up a
+specific scenario, and make sure that your strategy reacts how you'd
+expect it to.
+
+To make that setup a little easier, we've included a `BattleMaker.make` function.
+
+It lets you make a sample battle, like so:
+
+```ruby
+BattleMaker.make(
+  [
+    "_____",
+    "_____",
+    "0_x_1",
+    "_____",
+    "_____",
+  ],
+  {
+    1 => {
+      rotation: 180,
+    }
+  }
+)
+```
+
+Each string represents a row of cells on the board. Values for a space can be:
+
+- `_` or ``: A blank space
+- `0-9`: A robot. The `0` robot represents the player, and only robots that robot_0 can see will be rendered.
+- `x`: A wall
+
+You can pass an optional hash of overrides for each robot, to do things like set its rotation or armor. See [`robot.rb`](./lib/strategy/models/robot.rb) for the full list of options.
 
 ## The Tournament
 
