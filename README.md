@@ -31,7 +31,7 @@ The commands that you can return are:
 
 ### Hello, Robot
 
-So you want to come out guns a-blaizin' like Newman and Redford at the end of Butch Cassify and the Sundance Kid? Good for you. This could be your strategy.
+So you want to come out guns a-blaizin' like Newman and Redford at the end of Butch Cassidy and the Sundance Kid? Good for you. This could be your strategy.
 
 file: strategy.rb
 
@@ -72,17 +72,17 @@ Command: `r<deg>`, deg = turret angle in degrees (0 - 360)
 
 Example: `r145`
 
-**NOTE**: With the rotate command you specify the _absolute_ angle of your turret. The angle you specify is where your turrent will end up.
+**NOTE**: With the rotate command you specify the _absolute_ angle of your turret. The angle you specify is where your turret will end up.
 
 ### Firing your laser
 
-Once you have your turrent poiting in the general direction of your enemy, you can fire your laser. Within a single turn you are allowed to rotate your turrent slightly before firing - 10 degrees in either direction.
+Once you have your turret pointing in the general direction of your enemy, you can fire your laser. Within a single turn you are allowed to rotate your turret slightly before firing - 10 degrees in either direction.
 
 Command: `f<deg>`, deg = turret rotation in degrees (-10 - 10)
 
 Example: `f-8`
 
-**NOTE**: With the fire command you specify the _relative_ angle of your turrent. The angle you specify is how far your turrent will go relative to its current angle.
+**NOTE**: With the fire command you specify the _relative_ angle of your turret. The angle you specify is how far your turret will go relative to its current angle.
 
 ### Resting
 
@@ -92,7 +92,7 @@ Obviously your robot has some motion-hindered solar laser batteries. Duh.
 
 ## Tips
 
-To help you get started, there are example strategies provided for agressive, defensive, and hybrid robots in the gem's code base.
+To help you get started, there are example strategies provided for aggressive, defensive, and hybrid robots in the gem's code base.
 
 In addition, `base.rb` contains a DSL that implements some of the more complicated logic for locating enemies, avoiding walls, and calculating firing solutions. The sample strategies utilize this DSL, but you are free to roll your own, so long as it emits one of the approved returns for the `on_turn` handler.
 
