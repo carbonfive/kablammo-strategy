@@ -76,7 +76,7 @@ module Strategy
     end
 
     def move!(direction, skew = 0)
-      direction + skew
+      "#{direction}#{skew}"
     end
 
     def move_north!(skew = 0)
