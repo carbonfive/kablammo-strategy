@@ -1,4 +1,5 @@
 require 'player'
+require 'battle_maker'
 require 'strategy/constants'
 require 'strategy/models'
 require 'strategy/base'
